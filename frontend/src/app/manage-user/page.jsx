@@ -1,5 +1,6 @@
 'use client';
 import axios from 'axios'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 const ManageUser = () =>{
@@ -18,6 +19,21 @@ const ManageUser = () =>{
     useEffect(() => {    //used for automatically show data without pressing any key 
       fetchUserData();
     }, [])
+    
+
+    const deleteUser = (id) =>
+      {
+        axios.delete('http://localhost:5000/user/delete/'+id)
+        .then((result) => {
+          if(result.status === 200){
+            fetchUserData();
+          }
+        }).catch((err) => {
+          console.log(err); 
+        });
+      }
+
+
     return (
         <div><>
         {/* Table Section */}
@@ -184,14 +200,28 @@ const ManageUser = () =>{
                         </td>
                         <td className="size-px whitespace-nowrap">
                           <div className="px-6 py-1.5">
-                            <a
+                            <Link
                               className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-                              href="#"
+                              href={'/update-user/'+user._id}
                             >
                               Edit
-                            </a>
+                            </Link>
                           </div>
                         </td>
+
+                        <td className="size-px whitespace-nowrap">
+                          <div className="px-6 py-1.5">
+                            <button
+                            onClick={() => {deleteUser(user._id)}}
+                              className="inline-flex items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline font-medium dark:text-red-500"
+                              
+                            >
+                              Deletee
+                            </button>
+                          </div>
+                        </td>
+
+
                       </tr>
                             )
                         })
