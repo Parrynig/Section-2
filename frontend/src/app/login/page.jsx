@@ -1,10 +1,16 @@
 'use client';
+import useAppContext from '@/context/AppContext';
 import axios from 'axios';
 import { Formik, useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import toast from 'react-hot-toast';
 
 const Login = () => {
+
+  const {setLoggedIn, setCurrentUser} = useAppContext();
+
+  const router = useRouter();
 
   const loginForm = useFormik({
     initialValues: {
@@ -21,6 +27,12 @@ const Login = () => {
 
           if (result.status === 200) {
             toast.success('Login Successfull');
+
+            localStorage.setItem( 'user', JSON.stringify(result.data ) );
+            document.cookie = `token=${result.data.token}`;
+            router.push('/manage-user');
+
+
           } 
 
         }).catch((err) => {

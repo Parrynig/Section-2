@@ -66,16 +66,16 @@ const Navbar = () => {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end py-2 md:py-0 sm:ps-7">
                             <a
                                 className="py-3 ps-px sm:px-3 font-medium text-white"
-                                href="#"
+                                href="/signup"
                                 aria-current="page"
                             >
-                                Landing
+                                Signup
                             </a>
                             <a
                                 className="py-3 ps-px sm:px-3 font-medium text-white/80 hover:text-white"
-                                href="#"
+                                href="/manage-user"
                             >
-                                Account
+                                Manage User
                             </a>
                             <a
                                 className="py-3 ps-px sm:px-3 font-medium text-white/80 hover:text-white"
